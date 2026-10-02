@@ -1,0 +1,29 @@
+<!--Search list-->
+                
+<!--il testo che ho cercao nell'input viene insrito qui con annessa max quanità di items che vengono assegnati dall'array-->
+    <small><b>Result for {{text}}: {{this.books!.length}}</b></small>
+        <hr class="my-1" />
+<!-- Search preview-->
+<!--classe active viene applicata quando il libro che seleziono è uguale a id del testo desiderato-->
+    <div *ngFor="let book of books" class="post-preview searchResult" (click)="setActive.emit(book)" [ngClass]="{'active': book.id === this.active?.id}">
+         <img [src]="book.images" class="img-fluid" alt="">
+             <h2 class="post-title">{{book.title}}</h2>
+                <p class="post-meta">Autore: <em><i>{{book.author}}</i></em>
+                     <br>Isbn: {{book.isbn}}
+                 </p>
+    </div>
+ <!-- Divider-->
+        <hr class="my-4" />
+<!-- Post preview-->
+    <div class="post-preview searchResult">
+        <img src="/img/copertine/lafreccianera.jpg" class="img-fluid" alt="">
+            <h2 class="post-title">{{active?.title}}</h2>
+                <p class="post-meta">Autore: <em><i>R.Louis Stevenson</i></em>
+                    <br>Isbn: 4857-83427-051
+                </p>
+    </div>
+<!-- Divider-->
+        <hr class="my-4" />
+<!-- Pager-->
+<!--feedback and cart-->
+    <div class="col-sm-6">

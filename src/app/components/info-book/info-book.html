@@ -1,0 +1,26 @@
+                    <div class="post-preview">
+                            <h2 class="post-title">{{active?.title}}
+                                <i class="fas fa-info-circle blue" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                            </h2>
+                        <!-- Modal -->
+                        <app-modal [active]="active"></app-modal>
+                            <p class="post-meta">
+                                Author: {{active?.author}} <br>
+                                Isbn: {{active?.isbn}}<br>
+                                Pagine: {{active?.pagine}}<br>
+                                Categorie: {{active?.categoria}}<br>
+                                Anno di uscita: {{active?.anno}}<br>
+                                Feedback:
+                            <ng-container *ngIf="active">
+                                <!--inserisco icona in ng-container per assicurare che sia active-->
+                                <i *ngFor="let star of 5 | intToArray; index as i" class="icon" [ngClass]="{'ion-ios-star gold' : i < active!.stars, 'ion-ios-star-outline' : i >= active!.stars}"></i>
+                           </ng-container>
+                                <br>
+                                <b>Price:
+                                    <i *ngFor="let item of cartService.items; index as i" >
+                                        <em *ngIf="cartService.items[i].book.isbn ===active?.isbn && item.count > 1">(x{{item.count}})</em>
+                                    </i> {{active?.price}} €</b>
+                            </p>
+                        <!--inserisco direttamente il metodo del service per scrivere meno metodi nel componente-->
+                        <button (click)="addToCart.emit(active!)" class="btn btn-success">Add to cart</button>
+                    </div>

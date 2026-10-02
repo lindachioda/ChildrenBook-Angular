@@ -3,6 +3,7 @@ import { CartService } from './cart-service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Auth } from '../../model/auth';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class AuthService {
     const params = new HttpParams()
     .set('email',email)
     .set('pass',pass)
-    this.http.get<Auth>('http://localhost:3000/login', {params}).subscribe(
+    this.http.get<Auth>(`${environment.apiUrl}/login`, {params}).subscribe(
       res=>{
         this.data = res
         console.log(res)
